@@ -119,7 +119,7 @@ define(function(require) {
 
         newEnemy: function() {
             var pos = Math.random() * view.bounds.height;
-            var enemy = new Spaceship([side ? view.bounds.width : 0, pos]);
+            var enemy = new Spaceship([view.bounds.width, pos]);
             
             var cur_scale = this.player.strokeBounds.width / enemy.strokeBounds.width;
 
