@@ -19,7 +19,7 @@ define(function(require) {
 
     var Game = {
         start: function() {
-            this.player = new Spaceship(view.bounds.center);
+            this.player = new Spaceship(view.bounds.LeftCenter);
             this.lastSpaceship = 0;
             this.score = 0;
             this.started = true;
@@ -77,13 +77,6 @@ define(function(require) {
 
             // move the spaceship by the given velocity
             player.position = player.position.add(player.velocity);
-            
-            // change the spaceship's orientation accordingly
-            if ((player.velocity[0] > 0 && player.orientation == C.LEFT) ||
-                (player.velocity[0] < 0 && player.orientation == C.RIGHT)) {
-                player.rotate(180);
-                player.orientation = !player.orientation;
-            }
 
             // handle enemy spaceship logic and collisions
             _.forEach(project.activeLayer.children, function(otherSpaceship) {
@@ -126,7 +119,6 @@ define(function(require) {
 
         newEnemy: function() {
             var pos = Math.random() * view.bounds.height;
-            var side = Math.random() > 0.5;
             var enemy = new Spaceship([side ? view.bounds.width : 0, pos]);
             
             var cur_scale = this.player.strokeBounds.width / enemy.strokeBounds.width;
@@ -134,11 +126,10 @@ define(function(require) {
             var scale = cur_scale;
             enemy.scale(scale);
 
-            enemy.position.x += (side ? 1 : -1) * enemy.strokeBounds.width / 2;
+            enemy.position.x += enemy.strokeBounds.width / 2;
             
-            enemy.addVelocity([(side ? -1 : 1) * 3 * (cur_scale / scale), 0]);
+            enemy.addVelocity([-3 * (cur_scale / scale), 0]);
             enemy.children[0].fillColor = '#' + (Math.round(0xffffff * Math.random())).toString(16);
-            enemy.rotate(side ? 0 : 180);
         }
     };
 
