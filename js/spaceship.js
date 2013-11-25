@@ -9,15 +9,15 @@ define(function(require) {
     C    = require('constants'),
     Util = require('util');
 
-    function Spaceship(position) {
+    function Spaceship(position,ship) {
 
         // our Spaceship is an instance of a paper Group
         Group.call(this);
 
         // temporary raster of Spaceship
-        var raster = new Raster('s1');
+        var raster = new Raster(ship);
         raster.position = view.center;
-        raster.scale(0.5)
+        raster.scale(0.5);
         raster.rotate(90);
 
         this.addChild(raster);

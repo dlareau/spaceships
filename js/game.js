@@ -19,7 +19,7 @@ define(function(require) {
 
     var Game = {
         start: function() {
-            this.player = new Spaceship(view.bounds.Leftcenter);
+            this.player = new Spaceship(view.bounds.Leftcenter,'s1');
             this.lastSpaceship = 0;
             this.score = 0;
             this.started = true;
@@ -119,7 +119,8 @@ define(function(require) {
 
         newEnemy: function() {
             var pos = Math.random() * view.bounds.height;
-            var enemy = new Spaceship([view.bounds.width, pos]);
+            var enemytype = Math.floor(Math.random() * 9.0);
+            var enemy = new Spaceship([view.bounds.width, pos],'s'+ enemytype);
             
             var cur_scale = this.player.strokeBounds.width / enemy.strokeBounds.width;
 
