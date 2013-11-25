@@ -120,6 +120,7 @@ define(function(require) {
                 
                     if (overlapArea / otherArea > C.MIN_EAT_OVERLAP & overlap.width > 0) {
                         this.score += 5;
+                        this.scoreText.content = 'Score: ' + this.score;
                         otherSpaceship.remove();
                         bullet.remove();
                         var index = this.bulletList.indexOf(bullet);
