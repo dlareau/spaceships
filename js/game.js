@@ -108,6 +108,7 @@ define(function(require) {
                     this.scoreText.id === otherSpaceship.id) {
                     return;
                 }
+
                 var otherBounds = otherSpaceship.strokeBounds;
                 _.forEach(this.bulletList,function(bullet){
                 
@@ -135,6 +136,7 @@ define(function(require) {
 
                 if (overlapArea / otherArea > C.MIN_EAT_OVERLAP & overlap.width > 0) {
                     this.lives--;
+                    otherSpaceship.remove();
                     if(this.lives > 0)
                         player.position = view.bounds.leftCenter;
                     else 
@@ -161,7 +163,7 @@ define(function(require) {
 
         newEnemy: function() {
             var pos = Math.random() * view.bounds.height;
-            var enemytype = Math.floor(Math.random() * 8.0) + 1;
+            var enemytype = Math.floor(Math.random() * 7.0) + 2;
             var enemy = new Spaceship([view.bounds.width, pos],'s'+ enemytype);
             
             var cur_scale = this.player.strokeBounds.width / enemy.strokeBounds.width;
