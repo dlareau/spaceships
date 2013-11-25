@@ -27,6 +27,19 @@ define(function(require) {
             this.lastBulletTime = -99999999999;
             this.player.rotate(180);
 
+            this.livesText = new PointText(new Point(75, 50));
+            this.livesText.justification = 'center';
+            this.livesText.fillColor = 'black';
+            this.livesText.content = 'Lives: ' + this.lives;
+            this.livesText.fontSize = 25;
+
+            this.scoreText = new PointText(new Point(75, 75));
+            this.scoreText.justification = 'center';
+            this.scoreText.fillColor = 'black';
+            this.scoreText.content = 'Score: ' + this.score;
+            this.scoreText.fontSize = 25;
+
+
             for (var i = 0; i < 5; i++) {
                 this.newEnemy();
             }
@@ -84,7 +97,6 @@ define(function(require) {
                 }
             }
 
-
             // move the spaceship by the given velocity
             player.position = player.position.add(player.velocity);
 
@@ -106,7 +118,7 @@ define(function(require) {
                         player.position = view.bounds.leftCenter;
                     else 
                         this.end();
-
+                    this.livesText.content = 'Lives: ' + this.lives;
                 }
                 
                 otherSpaceship.position = otherSpaceship.position.add(otherSpaceship.velocity);
