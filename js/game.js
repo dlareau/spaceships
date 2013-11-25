@@ -58,6 +58,13 @@ define(function(require) {
             } else if (Key.isDown('d') || Key.isDown('right')) {
                 player.addVelocity([C.ACCELERATION, 0]);
             }
+            
+            if(Key.isDown('space')){
+            
+                var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s0');
+                copy.addVelocity([6,0]);
+                console.log(copy.velocity);
+            }
 
             // do simple 2D physics for the player
             // calculate velocity with deceleration
