@@ -17,7 +17,8 @@ define(function(require) {
         // temporary raster of Spaceship
         var raster = new Raster('s1');
         raster.position = view.center;
-        raster.rotate(-90);
+        raster.scale(0.5)
+        raster.rotate(90);
 
         this.addChild(raster);
         this.position = position;

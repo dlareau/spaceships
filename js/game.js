@@ -19,12 +19,13 @@ define(function(require) {
 
     var Game = {
         start: function() {
-            this.player = new Spaceship(view.bounds.LeftCenter);
+            this.player = new Spaceship(view.bounds.Leftcenter);
             this.lastSpaceship = 0;
             this.score = 0;
             this.started = true;
+            this.player.rotate(180);
 
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < 5; i++) {
                 this.newEnemy();
             }
         },
@@ -92,7 +93,6 @@ define(function(require) {
 
                 if (overlapArea / otherArea > C.MIN_EAT_OVERLAP & overlap.width > 0) {
                     if (playerBounds.width > otherBounds.width) {
-                        player.scale((playerBounds.width + 7 * (otherBounds.width / playerBounds.width + 0.3)) / playerBounds.width);
                         otherSpaceship.remove();
                         this.score++;
                     } else {
