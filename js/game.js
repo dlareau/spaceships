@@ -26,6 +26,7 @@ define(function(require) {
             this.started = true;
             this.lastBulletTime = -99999999999;
             this.player.rotate(180);
+            this.bulletList = [];
 
             this.livesText = new PointText(new Point(75, 50));
             this.livesText.justification = 'center';
@@ -77,6 +78,7 @@ define(function(require) {
                 var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s1');
                 copy.shoot();
                 this.lastBulletTime = e.time;
+                this.bulletList.push(copy);
             }
 
             // do simple 2D physics for the player
@@ -104,9 +106,26 @@ define(function(require) {
                 if (player.id === otherSpaceship.id) {
                     return;
                 }
+                var otherBounds = otherSpaceship.strokeBounds;
+                _.forEach(this.bulletList,function(bullet){
+                
+                    if(bullet.id === otherSpaceship.id)
+                        return;
+                    
+                    overlap = otherBounds.intersect(bullet.strokeBounds),
+                    overlapArea = overlap.width * overlap.height,
+                    otherArea   = otherBounds.width * otherBounds.height;
+                
+                    if (overlapArea / otherArea > C.MIN_EAT_OVERLAP & overlap.width > 0) {
+                        this.score += 5;
+                        otherSpaceship.remove();
+                        bullet.remove();
+                        var index = this.bulletList.indexOf(bullet);
+                        this.bulletList.splice(index,1);
+                    }
+                },this);
                 
                 var 
-                otherBounds = otherSpaceship.strokeBounds,
                 overlap = otherBounds.intersect(playerBounds),
                 overlapArea = overlap.width * overlap.height,
                 otherArea   = otherBounds.width * otherBounds.height;
