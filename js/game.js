@@ -60,10 +60,9 @@ define(function(require) {
                 player.addVelocity([C.ACCELERATION, 0]);
             }
 
-            if(Key.isDown('space') && e.time - this.lastBulletTime >= C.BULLET_SPEED ){
-                
+            if(Key.isDown('space') && e.time - this.lastBulletTime >= C.BULLET_SPAWN_TIME ){
                 var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s1');
-                copy.addVelocity([10,0]);
+                copy.shoot();
                 this.lastBulletTime = e.time;
             }
 
