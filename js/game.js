@@ -101,7 +101,9 @@ define(function(require) {
 
             // handle enemy spaceship logic and collisions
             _.forEach(project.activeLayer.children, function(otherSpaceship) {
-                if (player.id === otherSpaceship.id) {
+                if (player.id         === otherSpaceship.id || 
+                    this.livesText.id === otherSpaceship.id || 
+                    this.scoreText.id === otherSpaceship.id) {
                     return;
                 }
                 
