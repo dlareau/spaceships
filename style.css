@@ -18,6 +18,10 @@ canvas {
     text-align: center;
 }
 
+img {
+    display: none;
+}
+
 h1 {
     font-weight: lighter;
     font-size: 120px;
