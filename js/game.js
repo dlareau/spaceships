@@ -24,6 +24,7 @@ define(function(require) {
             this.score = 0;
             this.lives = 3;
             this.started = true;
+            this.lastBulletTime = -99999999999;
             this.player.rotate(180);
 
             for (var i = 0; i < 5; i++) {
@@ -58,12 +59,12 @@ define(function(require) {
             } else if (Key.isDown('d') || Key.isDown('right')) {
                 player.addVelocity([C.ACCELERATION, 0]);
             }
-            
-            if(Key.isDown('space')){
-            
+
+            if(Key.isDown('space') && e.time - this.lastBulletTime >= C.BULLET_SPEED ){
+                
                 var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s1');
-                copy.addVelocity([6,0]);
-                console.log(copy.velocity);
+                copy.addVelocity([10,0]);
+                this.lastBulletTime = e.time;
             }
 
             // do simple 2D physics for the player
