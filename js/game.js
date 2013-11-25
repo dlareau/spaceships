@@ -75,7 +75,7 @@ define(function(require) {
             }
 
             if(Key.isDown('space') && e.time - this.lastBulletTime >= C.BULLET_SPAWN_TIME ){
-                var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s1');
+                var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s0');
                 copy.shoot();
                 this.lastBulletTime = e.time;
                 this.bulletList.push(copy);
@@ -103,7 +103,9 @@ define(function(require) {
 
             // handle enemy spaceship logic and collisions
             _.forEach(project.activeLayer.children, function(otherSpaceship) {
-                if (player.id === otherSpaceship.id) {
+                if (player.id         === otherSpaceship.id || 
+                    this.livesText.id === otherSpaceship.id || 
+                    this.scoreText.id === otherSpaceship.id) {
                     return;
                 }
                 var otherBounds = otherSpaceship.strokeBounds;
