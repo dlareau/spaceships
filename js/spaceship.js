@@ -33,5 +33,9 @@ define(function(require) {
                         Util.addVelocity(this.velocity[1], vector[1])];
     }
 
+    Spaceship.prototype.shoot = function() {
+       this.velocity = [C.BULLET_SPEED,0];
+    }
+
     return Spaceship;
 });
