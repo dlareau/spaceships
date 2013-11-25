@@ -74,7 +74,7 @@ define(function(require) {
             }
 
             if(Key.isDown('space') && e.time - this.lastBulletTime >= C.BULLET_SPAWN_TIME ){
-                var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s1');
+                var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s0');
                 copy.shoot();
                 this.lastBulletTime = e.time;
             }
