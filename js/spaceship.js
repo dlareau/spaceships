@@ -14,24 +14,10 @@ define(function(require) {
         // our Spaceship is an instance of a paper Group
         Group.call(this);
 
-        var start = new Point(0, 0);
+        // temporary raster of Spaceship
+        var raster = new Raster('s1');
 
-        // points of Spaceship outline
-        var segments = [start, 
-                        start.add([20, 10]), 
-                        start.add([40, 3]), 
-                        start.add([50, 10]), 
-                        start.add([50, -10]), 
-                        start.add([40, -3]), 
-                        start.add([20, -10])];
-
-        var outline = new Path(segments);
-        outline.strokeColor = 'black';
-        outline.fillColor = '#a00';
-        outline.closed = true;
-        outline.smooth();
-        
-        this.addChild(outline);
+        this.addChild(raster);
         this.position = position;
         this.orientation = C.LEFT;
         this.velocity = [0, 0];
