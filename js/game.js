@@ -19,9 +19,10 @@ define(function(require) {
 
     var Game = {
         start: function() {
-            this.player = new Spaceship(view.bounds.Leftcenter,'s1');
+            this.player = new Spaceship(view.bounds.leftCenter,'s1');
             this.lastSpaceship = 0;
             this.score = 0;
+            this.lives = 3;
             this.started = true;
             this.player.rotate(180);
 
@@ -92,12 +93,12 @@ define(function(require) {
                 otherArea   = otherBounds.width * otherBounds.height;
 
                 if (overlapArea / otherArea > C.MIN_EAT_OVERLAP & overlap.width > 0) {
-                    if (playerBounds.width > otherBounds.width) {
-                        otherSpaceship.remove();
-                        this.score++;
-                    } else {
+                    this.lives--;
+                    if(this.lives > 0)
+                        player.position = view.bounds.leftCenter;
+                    else 
                         this.end();
-                    }
+
                 }
                 
                 otherSpaceship.position = otherSpaceship.position.add(otherSpaceship.velocity);
