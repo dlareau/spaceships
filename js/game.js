@@ -61,7 +61,7 @@ define(function(require) {
             
             if(Key.isDown('space')){
             
-                var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s0');
+                var copy = new Spaceship(new Point(player.position.x+100,player.position.y),'s1');
                 copy.addVelocity([6,0]);
                 console.log(copy.velocity);
             }
