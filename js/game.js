@@ -31,13 +31,13 @@ define(function(require) {
 
             this.livesText = new PointText(new Point(75, 50));
             this.livesText.justification = 'center';
-            this.livesText.fillColor = 'black';
+            this.livesText.fillColor = 'white';
             this.livesText.content = 'Lives: ' + this.lives;
             this.livesText.fontSize = 25;
 
             this.scoreText = new PointText(new Point(75, 75));
             this.scoreText.justification = 'center';
-            this.scoreText.fillColor = 'black';
+            this.scoreText.fillColor = 'white';
             this.scoreText.content = 'Score: ' + this.score;
             this.scoreText.fontSize = 25;
 
