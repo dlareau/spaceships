@@ -11,6 +11,7 @@ define(function(require) {
         DECELERATION: 0.07,         // how quickly he decelerates
         LEFT: 1,                    
         RIGHT: 0,
+        CHECK_ZOMBIE_TIME: 5,
         SHIP_SPAWN_TIME: 1,       // how frequently (in seconds) fish spawn
         BULLET_SPAWN_TIME: .2,
         BULLET_SPEED: 12,

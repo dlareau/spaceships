@@ -15,12 +15,13 @@ define(function(require) {
     Spaceship = require('spaceship'),
     C    = require('constants'),
     Util = require('util');
-    
+        
 
     var Game = {
         start: function() {
             this.player = new Spaceship(view.bounds.leftCenter,'s1');
             this.lastSpaceship = 0;
+            this.lastRemoval = 0;
             this.score = 0;
             this.lives = 3;
             this.started = true;
@@ -108,7 +109,6 @@ define(function(require) {
                     this.scoreText.id === otherSpaceship.id) {
                     return;
                 }
-
                 var otherBounds = otherSpaceship.strokeBounds;
                 _.forEach(this.bulletList,function(bullet){
                 
@@ -133,10 +133,14 @@ define(function(require) {
                 overlap = otherBounds.intersect(playerBounds),
                 overlapArea = overlap.width * overlap.height,
                 otherArea   = otherBounds.width * otherBounds.height;
+                
 
                 if (overlapArea / otherArea > C.MIN_EAT_OVERLAP & overlap.width > 0) {
                     this.lives--;
+                    if(this.lives > 0)
+                        this.score = Math.floor(this.score * 0.8);
                     otherSpaceship.remove();
+                    this.scoreText.content = 'Score: ' + this.score;
                     if(this.lives > 0)
                         player.position = view.bounds.leftCenter;
                     else 
@@ -144,12 +148,11 @@ define(function(require) {
                     this.livesText.content = 'Lives: ' + this.lives;
                 }
                 
+                
+                
                 otherSpaceship.position = otherSpaceship.position.add(otherSpaceship.velocity);
 
-                // todo: add GC
-                /*if (!other_bounds.intersects(view.bounds) && !view.bounds.contains(other_bounds)) {
-                  otherSpaceship.remove();
-                  }*/
+
             }, this);
             
             Util.decelerate(player.velocity);
@@ -159,6 +162,19 @@ define(function(require) {
                 this.newEnemy();
                 this.lastSpaceship = e.time;
             }
+            
+            // Delete gone things
+            if (e.time - this.lastRemoval >= C.CHECK_ZOMBIE_TIME) {
+                _.forEach(project.activeLayer.children, function(ship) {
+                    // todo: add GC
+                    if (!ship.strokeBounds.intersects(view.bounds) && !view.bounds.contains(ship.strokeBounds)) {
+                      ship.remove();
+                    }
+                })
+                this.lastRemoval = e.time;
+                console.log(project.activeLayer.children.length)
+            }
+       
         },
 
         newEnemy: function() {
