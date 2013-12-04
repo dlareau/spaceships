@@ -3,6 +3,11 @@
     padding: 0; 
 }
 
+html { 
+  background: url(http://scri8e.com/stars/bgs/G1/bg-nu-star.gif) no-repeat center center fixed; 
+  background-size: cover;
+}
+
 body { 
     overflow: hidden; 
     font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -15,6 +20,8 @@ canvas {
 
 #dialogue { 
     margin-top: 100px;
+    color: white;
+    font-size: 24px;
     text-align: center;
 }
 
@@ -23,13 +30,15 @@ img {
 }
 
 h1 {
+    font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans serif;
     font-weight: lighter;
     font-size: 120px;
 }
 
 button {
-    font-size: 24px;
-    padding: 3px 15px;
+    background-color: white;
+    font-size: 36px;
+    padding: 20px 60px;
     border-radius: 4px;
 }
 

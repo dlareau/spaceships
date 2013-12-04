@@ -10,8 +10,11 @@ define(function(require) {
     
     var game = require('game');
     document.getElementById('play').addEventListener('click', function() {
+    	//document.getElementById('top').style.background = "url(http://www.psdgraphics.com/file/stars.jpg) no-repeat center center fixed";
+        //document.getElementById('top').style.background-size = "cover";
         document.getElementById('dialogue').style.display = 'none';
         document.getElementById('spaceships').style.display = 'block';
         game.start();
     });
+
 });

@@ -48,7 +48,7 @@ define(function(require) {
 
         end: function() {
             document.getElementById('dialogue').style.display = 'block';
-            document.getElementById('score').innerHTML = 'Your score was ' + this.score;
+            document.getElementById('score').innerHTML = 'You have let the aliens through! <br> However you did get ' + this.score + " points.";
             project.activeLayer.removeChildren();
             this.started = false;
         },
