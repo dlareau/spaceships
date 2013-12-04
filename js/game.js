@@ -120,7 +120,10 @@ define(function(require) {
                     otherArea   = otherBounds.width * otherBounds.height;
                 
                     if (overlapArea / otherArea > C.MIN_EAT_OVERLAP & overlap.width > 0) {
-                        this.score += 5;
+                        if(C.STALE == 1)
+                            this.score += Math.max(3,10-Math.floor(this.bulletList.length/4));
+                        else
+                            this.score += 10;
                         this.scoreText.content = 'Score: ' + this.score;
                         otherSpaceship.remove();
                         bullet.remove();
@@ -144,6 +147,12 @@ define(function(require) {
                     else 
                         this.end();
                     this.livesText.content = 'Lives: ' + this.lives;
+                    
+                    /* Remove all bullets on new life */
+                    _.forEach(this.bulletList,function(bullet){
+                        bullet.remove();
+                    },this);
+                    this.bulletList = [];
                 }
                 
                 
@@ -154,7 +163,7 @@ define(function(require) {
             }, this);
             
             Util.decelerate(player.velocity);
-
+            
             // generate spaceshipes every second
             if (e.time - this.lastSpaceship >= C.SHIP_SPAWN_TIME) {
                 this.newEnemy();
@@ -163,14 +172,22 @@ define(function(require) {
             
             // Delete gone things
             if (e.time - this.lastRemoval >= C.CHECK_ZOMBIE_TIME) {
+                _.forEach(this.bulletList,function(bullet){
+                    if (!bullet.strokeBounds.intersects(view.bounds) && !view.bounds.contains(bullet.strokeBounds)) {
+                        bullet.remove();
+                        var index = this.bulletList.indexOf(bullet);
+                        this.bulletList.splice(index,1);
+                    }
+                },this);
                 _.forEach(project.activeLayer.children, function(ship) {
                     // todo: add GC
                     if (!ship.strokeBounds.intersects(view.bounds) && !view.bounds.contains(ship.strokeBounds)) {
                       ship.remove();
                     }
-                })
+                },this);
+ 
                 this.lastRemoval = e.time;
-                console.log(project.activeLayer.children.length)
+                console.log(this.bulletList.length);
             }
        
         },

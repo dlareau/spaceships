@@ -15,6 +15,8 @@ define(function(require) {
         SHIP_SPAWN_TIME: 1,       // how frequently (in seconds) fish spawn
         BULLET_SPAWN_TIME: .2,
         BULLET_SPEED: 12,
-        MIN_EAT_OVERLAP: 0.05       // minimum area needed for small fish to eat or be eaten (ratio)
+        MIN_EAT_OVERLAP: 0.05,       // minimum area needed for small fish to eat or be eaten (ratio)
+        STALE: 1,
+        
     };
 }); 
