@@ -137,8 +137,6 @@ define(function(require) {
 
                 if (overlapArea / otherArea > C.MIN_EAT_OVERLAP & overlap.width > 0) {
                     this.lives--;
-                    if(this.lives > 0)
-                        this.score = Math.floor(this.score * 0.8);
                     otherSpaceship.remove();
                     this.scoreText.content = 'Score: ' + this.score;
                     if(this.lives > 0)
